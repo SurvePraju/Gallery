@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Gallery{% endblock title %}
+
+
+
+{% block content %}
+
+
+
+
+<div class="container">
+    <h1 class="text-center my-3">Gallery</h1>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            <ul style="list-style: none;" class="list-group p-3 border border-dark text-center bg-light">
+                <li><a href="{% url 'home' %}" class="list-group-item bg-dark bg-opacity-25 choice">All Images</a></li>
+                <li>
+                    <div class="dropdown">
+                        <button type="button"
+                            class="list-group-item dropdown-toggle bg-dark bg-opacity-25 choice m-0 w-100"
+                            data-bs-toggle="dropdown">
+                            Category
+                        </button>
+                        <ul class="dropdown-menu bg-secondary bg-opacity-25 p-0">
+                            {% for item in category %}
+
+                            <li><a href="{% url 'image_category' item.category%}"
+                                    class="dropdown-item bg-dark bg-opacity-25 choice">{{item.category|title}}
+
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+
+
+        <div class="col-sm-9 bg-dark bg-gradient border border-dark border-2 ms-5 mb-5">
+            {% if image %}
+            <div class="row mb-4">
+
+                {% for img in image %}
+                <div class="col-sm-4 text-center p-0 img-fluid">
+                    <a href="{% url 'view_images' img.id %}" >
+
+                        <img src="{{ img.image.url }}" alt="{{img.image_name}}"
+                            class="img-fluid object-fit-cover border rounded image-name" style="max-height: 250px;" />
+                        <!-- <div class="text-center text-dark border border-dark rounded-3 text-decoration-none mx-0">
+                            {{img.image_name}}</div> -->
+                    </a>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center">No Images Found</div>
+                {% endif %}
+            </div>
+
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% if image.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link text-dark" href="?page={{image.previous_page_number}}">&laquo;</a>
+                    </li>
+                    {% endif %}
+
+                    {% if image.has_next %}
+                    <li class="page-item">
+                        <a class="page-link text-dark" href="?page={{image.next_page_number}}">&raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

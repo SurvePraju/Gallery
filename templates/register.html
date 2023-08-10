@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Register{% endblock title %}
+
+
+
+{% block content %}
+
+<div class="container bg-dark bg-gradient px-3">
+    <div class="row mt-3 pe-3 py-5">
+        <div class="col-sm-8"></div>
+        <div class="col-sm-4 bg-dark text-light border border-light shadow-lg p-3 px-5">
+            <h1 class="text-center">Register</h1>
+            <form action="{% url 'register' %}" method="POST" novalidate>
+                {% csrf_token %}
+                {% comment %} <div class="form-floating mb-3"> {% endcomment %}
+                {{form}}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-success btn-lg mt-1">Register</button><br>
+                {% comment %} </div> {% endcomment %}
+                    <a href="{% url 'user_login' %}" class="text-light">Already have an Account!</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock content %}
