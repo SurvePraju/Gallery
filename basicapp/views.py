@@ -35,10 +35,10 @@ def register(request):
         username = request.POST['username']
         if user.is_valid():
             user.save()
-            user_login(request, user)
+
             messages.success(
                 request, f"{username.capitalize()} Signed in Successfully")
-            return redirect("home")
+            return redirect("user_login")
         else:
             messages.warning(request, "Registration Unsuccesfull !! Try Again")
             return redirect("register")
@@ -103,6 +103,13 @@ def profile(request):
 def view_image(request, id):
     image = UploadImage.objects.get(id=id)
     return render(request, "view_image.html", {"image": image})
+
+
+def select_user(request, id):
+    images = UploadImage.objects.all().filter(user=id)
+    count = images.count()
+    user_info = User.objects.get(id=id)
+    return render(request, "selected_users_images.html", {"images": images, "user_info": user_info, "count": count})
 
 
 def trail(request):

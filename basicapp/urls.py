@@ -11,4 +11,5 @@ urlpatterns = [
     path("profile/", views.profile, name="profile"),
     path("image/<int:id>", views.view_image, name="view_images"),
     path("try/", views.trail, name="try"),
+    path("user-id-<int:id>/", views.select_user, name="selected_user_images"),
 ]

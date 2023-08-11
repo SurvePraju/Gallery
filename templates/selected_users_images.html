@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {{user_info.first_name}} {{user_info.last_name}}{% endblock title %}
+
+
+
+
+{% block content %}
+<div class="container bg-light px-3 my-3">
+    <div class="row">
+
+
+        <div class="col-8">
+            {% for img in images %}
+            <div class="bg-dark text-white mb-3 mt-2 py-2 px-3">
+                <h3>{{ img.image_name }}</h3>
+                <p class="opacity-75">Uploaded on- {{ img.upload_date }}</p>
+                <p class="lead">Category- {{img.category}}</p>
+                <div class="text-center">
+                    <img src="{{ img.image.url }}" alt="image" class="img-thumbnail mx-auto my-2"
+                        style="max-height:500px;">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-4 ">
+            <div class="container text-light bg-dark bg-gradient mt-2 pb-5 ">
+                <h3 class="text-center pt-2">Uploaded By</h3>
+                <hr>
+                <div class="text-end">
+                    <strong>
+                        {{user_info.first_name}} {{user_info.last_name}}</strong>
+                    <br>@{{user_info.username}} <br>
+                    <hr>
+                    Total Posts <br>
+                    {{count}}
+                    <hr>
+
+                    <br>Date Joined
+                    <br>{{user_info.date_joined}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}
+<img src=" {{ img.image.url }}" alt="">
