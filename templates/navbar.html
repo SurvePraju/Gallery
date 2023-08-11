@@ -42,6 +42,7 @@
     <ul class="dropdown-menu dropdown-menu-dark">
       <!-- Dropdown menu links -->
       <!-- <li><a class="dropdown-item" href="{% url 'upload_image' %}">Upload Images</a></li> -->
+      <li class="ps-3 border-bottom pb-2">{{user.first_name}} {{user.last_name}}<br> @{{user.username}}</li>
       <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
       <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
     </ul>

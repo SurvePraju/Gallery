@@ -42,7 +42,7 @@ class UploadImageForm(forms.ModelForm):
     class Meta:
         model = UploadImage
         fields = ['image_name', "category", "image"]
-        labels = {"image_name": "Image Name",
+        labels = {"image_name": "Image Title",
                   "image": "Upload Image", "category": "Image Category"}
         widgets = {
             "image_name": forms.TextInput(attrs={'class': "form-control"}),

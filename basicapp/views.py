@@ -22,7 +22,11 @@ def home(request):
 
 
 def display_categories(request, category):
-    return render(request, "home.html", {"image": UploadImage.objects.all().filter(category=category), "category": UploadImage.objects.all().values("category").distinct()})
+    filter_images = UploadImage.objects.all().filter(category=category)
+    paginator = Paginator(filter_images, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "home.html", {"image": page_obj, "category": UploadImage.objects.all().values("category").distinct()})
 
 
 def register(request):
@@ -63,10 +67,10 @@ def login(request):
 
 def user_logout(request):
     if request.user.is_authenticated:
-
-        logout(request)
         messages.success(
-            request, f"Logged off Succesfully!")
+            request, f"{request.user.username} Logged off Succesfully!")
+        logout(request)
+
     return redirect("user_login")
 
 
@@ -88,8 +92,11 @@ def upload_image(request):
 
 
 def profile(request):
-    user_info = UserInformation.objects.get(user=request.user.id)
     user_images = UploadImage.objects.all().filter(user=request.user.id)
+    try:
+        user_info = UserInformation.objects.get(user=request.user.id)
+    except:
+        user_info = None
     return render(request, "profile.html", {"user_info": user_info, "user_images": user_images})
 
 
