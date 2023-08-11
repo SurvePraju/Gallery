@@ -37,7 +37,6 @@ def register(request):
             return redirect("home")
         else:
             messages.warning(request, "Registration Unsuccesfull !! Try Again")
-            user_login(request, user)
             return redirect("register")
 
     fm = RegisterUser()
