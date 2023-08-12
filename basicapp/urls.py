@@ -12,6 +12,9 @@ urlpatterns = [
     path("image/<int:id>", views.view_image, name="view_images"),
     path("try/", views.trail, name="try"),
     path("user-id-<int:id>/", views.select_user, name="selected_user_images"),
-    path("update-user/<int:id>/", views.update_user, name="update_user"),
+    path("update-user-profile/<int:id>/",
+         views.update_user, name="update_user"),
     path("delete-image/<int:id>/", views.delete_image, name="delete_image"),
+    path("edit-image/<int:id>/", views.edit_image, name="edit_image"),
+
 ]

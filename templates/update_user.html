@@ -2,17 +2,27 @@
 
 
 
-{% block title %}{% endblock title %}
+{% block title %}{{user.first_name}} {{user.last_name}}{% endblock title %}
 
 
 
 {% block content %}
+<div class="container bg-dark bg-gradient py-5 mt-1">
+    <div class="row my-5 text-light">
+        <div class="col-4"></div>
+        <div class="col-4 pt-3 bg-dark border border-light">
+            <h3 class="text-center">Addition User Data</h3>
+            <hr>
+            <form action="{% url 'update_user' user.id%}" method="POST" enctype="multipart/form-data" class="pt-3">
+                {% csrf_token %}
 
-{{form}}
-
+                {{form}}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-success mt-4 mb-4">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
-
-
-
-

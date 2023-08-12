@@ -114,15 +114,27 @@ def select_user(request, id):
 
 def update_user(request, id):
     if request.method == "POST":
-        form = User.objects.get(id=id)
-        update_form = RegisterUser(request.POST, instance=id)
-        if update_form.is_valid():
-            update_form.save()
+        profile_pic = request.FILES["profile_image"]
+        contact = request.POST["contact"]
+        user = request.user
+        try:
+            user_data = UserInformation.objects.get(user_id=id)
+            UserInformation.objects.get(
+                user_id=id).profile_image.delete(save=True)
+            UpdateUserProfile(request.FILES, request.POST,
+                              instance=user_data).save()
+        except:
+            UserInformation(profile_image=profile_pic,
+                            contact=contact, user=user).save()
+        finally:
             return redirect("profile")
     else:
-        user_data = User.objects.get(id=id)
-    # form = RegisterUser(instance=user_data)
-        return render(request, "update_user.html", {"form": user_data})
+        try:
+            data = UserInformation.objects.get(user_id=id)
+            form = UpdateUserProfile(instance=data)
+        except:
+            form = UpdateUserProfile()
+        return render(request, "update_user.html", {"form": form})
 
 
 def trail(request):
@@ -139,3 +151,17 @@ def delete_image(request, id):
     else:
         messages.warning(request, f"Image Not Deleted")
         return redirect("profile")
+
+
+def edit_image(request, id):
+    if request.method == "POST":
+        image_data = UploadImage.objects.get(id=id)
+        UploadImage.objects.get(id=id).image.delete(save=True)
+        new_image_data = UploadImageForm(
+            request.POST, request.FILES, instance=image_data)
+        if new_image_data.is_valid():
+            new_image_data.save()
+            return redirect("profile")
+    img = UploadImage.objects.get(id=id)
+    form = UploadImageForm(instance=img)
+    return render(request, "edit_images.html", {"form": form, "data": image_data})

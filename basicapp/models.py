@@ -21,7 +21,8 @@ class UserInformation(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
     contact = models.PositiveIntegerField()
-    profile_image = models.ImageField(upload_to="profile_pictures/")
+    profile_image = models.ImageField(
+        upload_to="profile_pictures/", blank=True)
 
     def __str__(self) -> str:
         return f"{self.user}"

@@ -49,3 +49,13 @@ class UploadImageForm(forms.ModelForm):
             "category": forms.TextInput(attrs={'class': "form-control"}),
             "image": forms.FileInput(attrs={"class": "form-control"})
         }
+
+
+class UpdateUserProfile(forms.ModelForm):
+    class Meta:
+        model = UserInformation
+        fields = ["profile_image", "contact"]
+        labels = {"profile_image": "Profile Picture", "contact": "Contact"}
+        widgets = {
+            "contact": forms.NumberInput(attrs={'class': "form-control"}),
+            "profile_image": forms.FileInput(attrs={'class': "form-control"})}
