@@ -8,8 +8,10 @@ urlpatterns = [
     path("images/<str:category>/",
          views.display_categories, name="image_category"),
     path("logout/", views.user_logout, name="logout"),
-    path("profile/", views.profile, name="profile"),
+    path("logged-in-user-profile/", views.profile, name="profile"),
     path("image/<int:id>", views.view_image, name="view_images"),
     path("try/", views.trail, name="try"),
     path("user-id-<int:id>/", views.select_user, name="selected_user_images"),
+    path("update-user/<int:id>/", views.update_user, name="update_user"),
+    path("delete-image/<int:id>/", views.delete_image, name="delete_image"),
 ]

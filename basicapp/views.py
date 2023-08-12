@@ -112,5 +112,30 @@ def select_user(request, id):
     return render(request, "selected_users_images.html", {"images": images, "user_info": user_info, "count": count})
 
 
+def update_user(request, id):
+    if request.method == "POST":
+        form = User.objects.get(id=id)
+        update_form = RegisterUser(request.POST, instance=id)
+        if update_form.is_valid():
+            update_form.save()
+            return redirect("profile")
+    else:
+        user_data = User.objects.get(id=id)
+    # form = RegisterUser(instance=user_data)
+        return render(request, "update_user.html", {"form": user_data})
+
+
 def trail(request):
     return render(request, "try.html", {"image": UploadImage.objects.all()})
+
+
+def delete_image(request, id):
+    if request.method == "POST":
+        image_selected = UploadImage.objects.get(id=id)
+        image_selected.image.delete(save=True)
+        image_selected.delete()
+        messages.success(request, f"Image Deleted Successfully")
+        return redirect("profile")
+    else:
+        messages.warning(request, f"Image Not Deleted")
+        return redirect("profile")
