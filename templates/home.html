@@ -52,7 +52,7 @@
             <div class="row mb-4">
 
                 {% for img in image %}
-                <div class="col-sm-4 text-center p-0 img-fluid">
+                <div class="col-sm-4 text-center p-1 img-fluid">
                     <a href="{% url 'view_images' img.id %}" >
 
                         <img src="{{ img.image.url }}" alt="{{img.image_name}}"

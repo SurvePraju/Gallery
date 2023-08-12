@@ -10,7 +10,12 @@
 }
 
 
-
+.carousel-size-gallery {
+    width: 80vw;
+    height: 80vh;
+    background-color: aqua;
+    color: bisque;
+}
 
 /* 
 .image-name:hover {
