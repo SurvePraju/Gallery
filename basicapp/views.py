@@ -106,6 +106,8 @@ def view_image(request, id):
 
 
 def select_user(request, id):
+    if id == request.user.id:
+        return redirect("profile")
     images = UploadImage.objects.all().filter(user=id)
     count = images.count()
     user_info = User.objects.get(id=id)
