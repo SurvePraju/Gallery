@@ -21,6 +21,7 @@
                     <img src="{{ img.image.url }}" alt="image" class="img-thumbnail mx-auto my-2"
                         style="max-height:500px;">
                 </div>
+                {% include 'like_comment.html' %}
             </div>
             {% endfor %}
         </div>
@@ -29,7 +30,11 @@
             <div class="container text-light bg-dark bg-gradient mt-2 pb-5 ">
                 <h3 class="text-center pt-2">Uploaded By</h3>
                 <hr>
+                <div class="text-center"><img src="{{ profile_pic.profile_image.url }}" class="border rounded-circle"
+                        style="height: 150px;width: 150px;" alt=""></div>
                 <div class="text-end">
+
+                    <hr>
                     <strong>
                         {{user_info.first_name}} {{user_info.last_name}}</strong>
                     <br>@{{user_info.username}} <br>

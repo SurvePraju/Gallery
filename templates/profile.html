@@ -46,7 +46,8 @@
                 </div>
                 <div class="text-center">
                     <img src="{{ img.image.url }}" alt="image" class="img-thumbnail">
-                </div>
+                    
+                </div>{% include 'like_comment.html' %}
             </div>
             {% endfor %}
             {% else %}

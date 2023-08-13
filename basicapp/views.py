@@ -102,16 +102,17 @@ def profile(request):
 
 def view_image(request, id):
     image = UploadImage.objects.get(id=id)
-    return render(request, "view_image.html", {"image": image})
+    return render(request, "view_image.html", {"img": image})
 
 
 def select_user(request, id):
     if id == request.user.id:
         return redirect("profile")
     images = UploadImage.objects.all().filter(user=id)
+    profile_pic = UserInformation.objects.get(user_id=id)
     count = images.count()
     user_info = User.objects.get(id=id)
-    return render(request, "selected_users_images.html", {"images": images, "user_info": user_info, "count": count})
+    return render(request, "selected_users_images.html", {"profile_pic": profile_pic, "images": images, "user_info": user_info, "count": count})
 
 
 def update_user(request, id):
